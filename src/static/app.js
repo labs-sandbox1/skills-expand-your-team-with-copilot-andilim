@@ -833,11 +833,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Handle social sharing
   function handleShare(platform, activityName, details) {
     const baseUrl = window.location.origin;
-    const activityUrl = `${baseUrl}#${encodeURIComponent(activityName)}`;
+    const activityUrl = `${baseUrl}?activity=${encodeURIComponent(activityName)}`;
     const schedule = formatSchedule(details);
-    const shareText = `Check out ${activityName} at Mergington High School! ${schedule}`;
+    const schoolName = "Mergington High School";
+    const shareText = `Check out ${activityName} at ${schoolName}! ${schedule}`;
     const emailSubject = `Activity: ${activityName}`;
-    const emailBody = `I wanted to share this activity with you:\n\n${activityName}\n${details.description}\n\nSchedule: ${schedule}\n\nLearn more at: ${baseUrl}`;
+    const emailBody = `I wanted to share this activity with you:\n\n${activityName}\n${details.description}\n\nSchedule: ${schedule}\n\nLearn more at: ${activityUrl}`;
 
     let shareUrl;
 
