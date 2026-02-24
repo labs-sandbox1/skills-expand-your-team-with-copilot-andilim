@@ -1,4 +1,46 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Dark mode functionality
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+  const darkModeIcon = document.getElementById("dark-mode-icon");
+
+  // Update dark mode UI (icon and aria-label)
+  function updateDarkModeUI(isDarkMode) {
+    if (isDarkMode) {
+      darkModeIcon.textContent = "☀️";
+      darkModeToggle.setAttribute("aria-label", "Switch to light mode");
+    } else {
+      darkModeIcon.textContent = "🌙";
+      darkModeToggle.setAttribute("aria-label", "Switch to dark mode");
+    }
+  }
+
+  // Check for saved dark mode preference
+  function initializeDarkMode() {
+    const savedMode = localStorage.getItem("darkMode");
+    const isDarkMode = savedMode === "enabled";
+    
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode");
+    }
+    
+    updateDarkModeUI(isDarkMode);
+  }
+
+  // Toggle dark mode
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+    const isDarkMode = document.body.classList.contains("dark-mode");
+    
+    updateDarkModeUI(isDarkMode);
+    localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+  }
+
+  // Event listener for dark mode toggle
+  darkModeToggle.addEventListener("click", toggleDarkMode);
+
+  // Initialize dark mode on page load
+  initializeDarkMode();
+
   // DOM elements
   const activitiesList = document.getElementById("activities-list");
   const messageDiv = document.getElementById("message");
